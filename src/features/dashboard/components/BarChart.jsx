@@ -12,7 +12,7 @@ import TitleCard from '../../../components/Cards/TitleCard';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-function BarChart() {
+function BarChart({title}) {
 
   const options = {
     responsive: true,
@@ -42,7 +42,7 @@ function BarChart() {
   };
 
   return (
-    <TitleCard title={"Revenue"}>
+    <TitleCard title={title}>
       <Bar options={options} data={data} />
     </TitleCard>
 

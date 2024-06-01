@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import DoughnutChart from "./components/DoughnutChart";
 import { useState } from "react";
 import { showNotification } from "../../redux/slice/headerSlice";
+import MerchantCodeSelectBox from "./components/MerchantCodeSelectBox";
 
 const statsData = [
   {
@@ -23,24 +24,12 @@ const statsData = [
     icon: <UserGroupIcon className="w-8 h-8" />,
     description: "↗︎ 2300 (22%)",
   },
-  {
-    title: "Total Sales",
-    value: "$34,545",
-    icon: <CreditCardIcon className="w-8 h-8" />,
-    description: "Current month",
-  },
-  {
-    title: "Pending Leads",
-    value: "450",
-    icon: <CircleStackIcon className="w-8 h-8" />,
-    description: "50 in hot leads",
-  },
-  {
-    title: "Active Users",
-    value: "5.6k",
-    icon: <UsersIcon className="w-8 h-8" />,
-    description: "↙ 300 (18%)",
-  },
+  // {
+  //   title: "Total Sales",
+  //   value: "$34,545",
+  //   icon: <CreditCardIcon className="w-8 h-8" />,
+  //   description: "Current month",
+  // },
 ];
 
 function Dashboard() {
@@ -58,35 +47,41 @@ function Dashboard() {
 
   return (
     <>
-      {/** ---------------------- Select Period Content ------------------------- */}
-      <DashboardTopBar updateDashboardPeriod={updateDashboardPeriod} />
+      {/*------------------------ Merchant Code --------------------------------- */}
+      <MerchantCodeSelectBox />
 
       {/** ---------------------- Different stats content 1 ------------------------- */}
-      <div className="grid lg:grid-cols-4 mt-2 md:grid-cols-2 grid-cols-1 gap-6">
-        {statsData.map((d, k) => {
-          return <DashboardStats key={k} {...d} colorIndex={k} />;
-        })}
+      <div className="grid lg:grid-cols-2 mt-4 md:grid-cols-1 grid-cols-1 gap-6">
+        <div>
+          {statsData.map((d, k) => {
+            return <DashboardStats key={k} {...d} colorIndex={k} />;
+          })}
+        </div>
+        {/** ---------------------- Select Period Content ------------------------- */}
+        <DashboardTopBar updateDashboardPeriod={updateDashboardPeriod} />
+        <div></div>
       </div>
 
       {/** ---------------------- Different charts ------------------------- */}
       <div className="grid lg:grid-cols-2 mt-4 grid-cols-1 gap-6">
-        <LineChart />
-        <BarChart />
+        {/* <LineChart /> */}
+        <BarChart title={`Today's Deposit`} />
+        <BarChart title={`Duration's Deposit`} />
       </div>
 
       {/** ---------------------- Different stats content 2 ------------------------- */}
 
-      <div className="grid lg:grid-cols-2 mt-10 grid-cols-1 gap-6">
+      {/* <div className="grid lg:grid-cols-2 mt-10 grid-cols-1 gap-6">
         <AmountStats />
         <PageStats />
-      </div>
+      </div> */}
 
       {/** ---------------------- User source channels table  ------------------------- */}
 
-      <div className="grid lg:grid-cols-2 mt-4 grid-cols-1 gap-6">
+      {/* <div className="grid lg:grid-cols-2 mt-4 grid-cols-1 gap-6">
         <UserChannels />
         <DoughnutChart />
-      </div>
+      </div> */}
     </>
   );
 }
