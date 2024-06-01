@@ -27,11 +27,13 @@ function LeftSidebar() {
           <Link to={'/app/welcome'}><img className="mask mask-squircle w-10" src="/logo192.png" alt="A2X-PAY logo" />A2X-PAY</Link> </li>
         {
           routes.map((route, k) => {
+            console.log("🚀 ~ routes.map ~ route:", route.path)
             return (
               <li className="" key={k}>
                 {
                   route.submenu ?
-                    <SidebarSubmenu {...route} /> :
+                    // <SidebarSubmenu {...route} />
+                     "":
                     (<NavLink
                       end
                       to={route.path}

@@ -1,17 +1,16 @@
 // All components mapping with path for internal routes
 
-import { Squares2X2Icon } from '@heroicons/react/24/outline'
+import { lazy } from 'react'
 
-const iconClasses = `h-6 w-6`
+const Dashboard = lazy(() => import('../pages/protected/Dashboard'))
 
 
 const routes = [
-
   {
-    path: '/app/dashboard',
-    icon: <Squares2X2Icon className={iconClasses} />,
-    name: 'Dashboard',
+    path: '/dashboard',
+    component: Dashboard, 
   },
 
 ]
+
 export default routes

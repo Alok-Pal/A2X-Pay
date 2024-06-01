@@ -11,6 +11,7 @@ const Page404 = lazy(() => import('../pages/protected/404'))
 function PageContent() {
   const mainContentRef = useRef(null);
   const { pageTitle } = useSelector(state => state.header)
+  console.log("🚀 ~ PageContent ~ pageTitle:", pageTitle)
 
 
   // Scroll back to top on new page load
@@ -29,6 +30,7 @@ function PageContent() {
           <Routes>
             {
               routes?.map((route, key) => {
+                console.log("🚀 ~ routes?.map ~ route:", route)
                 return (
                   <Route
                     key={key}
