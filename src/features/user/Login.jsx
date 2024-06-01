@@ -31,7 +31,7 @@ function Login() {
       localStorage.setItem("token", "DumyTokenHere");
       setLoading(false);
       // window.location.href = "/app/welcome";
-      navigate("/home");
+      navigate("/app/dashboard");
     }
   };
 
