@@ -1,13 +1,13 @@
 import {
-  Chart as ChartJS,
   CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
+  Chart as ChartJS,
   Filler,
   Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Title,
+  Tooltip,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import TitleCard from '../../../components/Cards/TitleCard';
@@ -23,7 +23,7 @@ ChartJS.register(
   Legend
 );
 
-function LineChart(){
+function LineChart() {
 
   const options = {
     responsive: true,
@@ -34,28 +34,28 @@ function LineChart(){
     },
   };
 
-  
+
   const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
   const data = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: 'MAU',
-      data: labels.map(() => { return Math.random() * 100 + 500 }),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-  
+    labels,
+    datasets: [
+      {
+        fill: true,
+        label: 'MAU',
+        data: labels.map(() => { return Math.random() * 100 + 500 }),
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
 
-    return(
-      <TitleCard title={"Montly Active Users (in K)"}>
-          <Line data={data} options={options}/>
-      </TitleCard>
-    )
+
+  return (
+    <TitleCard title={"Montly Active Users (in K)"}>
+      <Line data={data} options={options} />
+    </TitleCard>
+  )
 }
 
 

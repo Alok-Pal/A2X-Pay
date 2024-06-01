@@ -1,8 +1,7 @@
 import React, { lazy, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { themeChange } from 'theme-change';
 import initializeApp from "./app/init";
-import checkAuth from "./app/auth";
-import { themeChange } from 'theme-change'
 import Layout from "./containers/Layout";
 
 const Login = lazy(() => import('./pages/Login'))
@@ -27,7 +26,7 @@ function App() {
           {/* Place new routes over this */}
           <Route path="/app/*" element={<Layout />} />
 
-          {/* <Route path="*" element={<Navigate to={token ? "/app/welcome" : "/login"} replace />} /> */}
+          {/* <Route path="*" element={<Navigate to={token ? "/app/dashboard" : "/login"} replace />} /> */}
 
         </Routes>
       </Router>
