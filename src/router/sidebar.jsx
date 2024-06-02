@@ -19,9 +19,9 @@ const routes = [
     submenu: [
 
       {
-        path: '/app/deposit/progress', //url
-        icon: <ArrowTrendingUpIcon className={submenuIconClasses} />, // icon component
-        name: 'In Progress', // name that appear in Sidebar
+        path: '/app/deposit/progress',
+        icon: <ArrowTrendingUpIcon className={submenuIconClasses} />,
+        name: 'In Progress',
       },
       {
         path: '/app/deposit/completed',
