@@ -1,43 +1,138 @@
-import moment from 'moment'
-import React from 'react'
+import { CopyOutlined } from '@ant-design/icons';
+import { Button, ConfigProvider, Table, Tag } from 'antd';
+import Column from 'antd/es/table/Column';
+import React, { useEffect, useState } from 'react';
 
-const Table = ({ data }) => {
+
+
+
+const TableComponent = ({ data }) => {
+  const [themeColor, setThemeColor] = useState(localStorage.getItem('theme') === 'dark' ? '##1d232a' : '#fff');
+
+  useEffect(() => {
+    const handleThemeChange = () => {
+      const newThemeColor = localStorage.getItem('theme') === 'dark' ? '##1d232a' : '#fff';
+      setThemeColor(newThemeColor);
+    };
+
+    window.addEventListener('storage', handleThemeChange);
+
+    // Call handleThemeChange initially to ensure state is synced with localStorage
+    handleThemeChange();
+
+    return () => {
+      window.removeEventListener('storage', handleThemeChange);
+    };
+  }, []);
+
+  const handleCopy = (values) => {
+    navigator.clipboard.writeText(values);
+  };
+
   return (
-    <table className="table w-full">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Amount</th>
-          <th>Code</th>
-          <th>Status</th>
-          <th>User</th>
-          <th>Merchant</th>
-          <th>Merchant Order ID</th>
-          <th>Paying UUID</th>
-          <th>Last Updated</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          data.map((l, k) => {
-            return (
-              <tr key={k}>
-                <td>{l.id}</td>
-                <td>${l.amount.toFixed(2)}</td>
-                <td>{l.code}</td>
-                <td>{l.status}</td>
-                <td>{l.user}</td>
-                <td>{l.merchant}</td>
-                <td>{l.merchantOrderId}</td>
-                <td>{l.payingUUID}</td>
-                <td>{moment(l.lastUpdated).format("D MMM YYYY")}</td>
-              </tr>
-            )
-          })
-        }
-      </tbody>
-    </table>
-  )
-}
+    <ConfigProvider
+      theme={{
+        token: {
+          // Seed Token
+          colorPrimary: '#1890ff', // Replace with your theme color
+          borderRadius: 2,
 
-export default Table
+          // Alias Token
+          colorBgContainer: '#ffffff', // Replace with your theme color
+        },
+      }}
+    >
+      <Table dataSource={data} rowKey="id">
+        <Column
+          title="ID"
+          dataIndex="id"
+          key="id"
+          width={"7%"}
+          className="bg-white"
+        />
+        <Column
+          title="Amount"
+          dataIndex="amount"
+          key="amount"
+          className="bg-white"
+          width={"15%"}
+        />
+        <Column
+          title="Code"
+          dataIndex="code"
+          key="code"
+          className="bg-white"
+          width={"10%"}
+        />
+        <Column
+          title="Status"
+          dataIndex="status"
+          key="status"
+          className="bg-white"
+          width={"10%"}
+          render={(status) => (
+            <Tag color={status === 'Assigned' ? 'blue' : status === 'Completed' ? 'green' : 'red'
+            }>
+              {status}
+            </Tag>
+          )}
+        />
+        <Column
+          title="User"
+          dataIndex="user"
+          key="user"
+          className="bg-white"
+          width={"15%"}
+        />
+        <Column
+          title="Merchant"
+          dataIndex="merchant"
+          key="merchant"
+          className="bg-white"
+          width={"10%"}
+        />
+        <Column
+          title="Merchant Order ID"
+          dataIndex="merchantOrderId"
+          key="merchantOrderId"
+          className="bg-white"
+          width={"13%"}
+          render={(value) => (
+            <div className={"accessTokenDiv flex justify-center items-center gap-3"} >
+              <div>{value}</div>
+              <Button className={'accessTokenDiv__copyBtn px-2'} onClick={() => handleCopy(value)}>
+                <CopyOutlined />
+              </Button>
+            </div>
+          )}
+        />
+        <Column
+          title="Paying UUID"
+          dataIndex="payingUUID"
+          key="payingUUID"
+          className="bg-white"
+          width={"15%"}
+          render={(value) => (
+            <div className={"accessTokenDiv flex justify-center items-center gap-3"} >
+              <div>{value}</div>
+              <Button className={'accessTokenDiv__copyBtn px-2'} onClick={() => handleCopy(value)}>
+                <CopyOutlined />
+              </Button>
+            </div>
+          )}
+        />
+        <Column
+          title="Last Updated"
+          dataIndex="lastUpdated"
+          key="lastUpdated"
+          className="bg-white"
+          width={"15%"}
+        />
+
+      </Table>
+    </ConfigProvider>
+  );
+};
+
+
+export default TableComponent;

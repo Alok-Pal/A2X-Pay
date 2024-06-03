@@ -1,5 +1,5 @@
 /** Icons are imported separatly to reduce build time */
-import { ArrowRightCircleIcon, ArrowTrendingUpIcon, ArrowUturnLeftIcon, BanknotesIcon, BuildingLibraryIcon, CheckBadgeIcon, CurrencyDollarIcon, TrashIcon, UserCircleIcon } from '@heroicons/react/16/solid'
+import { ArrowRightCircleIcon, ArrowTrendingUpIcon, ArrowUturnLeftIcon, BanknotesIcon, BuildingLibraryIcon, CheckBadgeIcon, CurrencyDollarIcon, GlobeAltIcon, TrashIcon, UserCircleIcon } from '@heroicons/react/16/solid'
 import { CreditCardIcon, UsersIcon } from '@heroicons/react/24/outline'
 import Squares2X2Icon from '@heroicons/react/24/outline/Squares2X2Icon'
 
@@ -17,7 +17,6 @@ const routes = [
     icon: <CurrencyDollarIcon className={`${iconClasses} inline`} />, // icon component
     name: 'Deposit', // name that appear in Sidebar
     submenu: [
-
       {
         path: '/app/deposit/progress',
         icon: <ArrowTrendingUpIcon className={submenuIconClasses} />,
@@ -32,6 +31,11 @@ const routes = [
         path: '/app/deposit/dropped',
         icon: <TrashIcon className={submenuIconClasses} />,
         name: 'Dropped',
+      },
+      {
+        path: '/app/deposit/all',
+        icon: <GlobeAltIcon className={submenuIconClasses} />,
+        name: 'All',
       },
     ]
   },

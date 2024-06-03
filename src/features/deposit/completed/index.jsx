@@ -38,14 +38,14 @@ const TopSideButtons = ({ applyFilter, applySearch }) => {
 }
 
 
-function InProgress() {
+function Completed() {
 
   const data = [
     {
       id: 1,
       amount: 150.75,
       code: 'A123',
-      status: 'Assigned',
+      status: 'Completed',
       user: 'John Doe',
       merchant: 'Amazon',
       merchantOrderId: 'M123456',
@@ -56,7 +56,7 @@ function InProgress() {
       id: 2,
       amount: 89.99,
       code: 'B456',
-      status: 'Assigned',
+      status: 'Completed',
       user: 'Jane Smith',
       merchant: 'Ebay',
       merchantOrderId: 'M654321',
@@ -67,7 +67,7 @@ function InProgress() {
       id: 3,
       amount: 299.99,
       code: 'C789',
-      status: 'Assigned',
+      status: 'Completed',
       user: 'Alice Johnson',
       merchant: 'Walmart',
       merchantOrderId: 'M112233',
@@ -78,7 +78,7 @@ function InProgress() {
       id: 4,
       amount: 49.99,
       code: 'D012',
-      status: 'Assigned',
+      status: 'Completed',
       user: 'Bob Brown',
       merchant: 'Best Buy',
       merchantOrderId: 'M445566',
@@ -89,7 +89,7 @@ function InProgress() {
       id: 5,
       amount: 120.00,
       code: 'E345',
-      status: 'Assigned',
+      status: 'Completed',
       user: 'Charlie Davis',
       merchant: 'Target',
       merchantOrderId: 'M778899',
@@ -112,4 +112,4 @@ function InProgress() {
 }
 
 
-export default InProgress
+export default Completed

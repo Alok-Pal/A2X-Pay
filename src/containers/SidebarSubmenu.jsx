@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom'
 
 
 function SidebarSubmenu({ submenu, name, icon }) {
-  console.log("🚀 ~ SidebarSubmenu ~ submenu:", submenu)
   const location = useLocation()
   const [isExpanded, setIsExpanded] = useState(false)
 
@@ -28,7 +27,6 @@ function SidebarSubmenu({ submenu, name, icon }) {
         <ul className={`menu menu-compact`}>
           {
             submenu.map((m, k) => {
-              console.log("🚀 ~ submenu.map ~ m:", m)
               return (
                 <li key={k}>
                   <Link to={m.path}>

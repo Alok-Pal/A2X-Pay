@@ -1,19 +1,20 @@
 
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import InProgress from '../../../../features/deposit/inProgress/index.jsx'
-import { setPageTitle } from '../../../../redux/slice/headerSlice'
+import { setPageTitle } from '../../../redux/slice/headerSlice.jsx'
+import Completed from '../../../features/deposit/completed/index.jsx'
+
 
 function InternalPage() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setPageTitle({ title: "In Progress" }))
+    dispatch(setPageTitle({ title: "Completed" }))
   }, [])
 
 
   return (
-    <InProgress />
+    <Completed />
   )
 }
 
