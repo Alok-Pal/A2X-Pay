@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import TitleCard from '../../../components/Cards/TitleCard'
 import SearchBar from "../../../components/Input/SearchBar"
 import TableComponent from '../components/Table'
+import InputText from '../components/inputText'
 
 const TopSideButtons = ({ applyFilter, applySearch }) => {
 
@@ -37,8 +38,14 @@ const TopSideButtons = ({ applyFilter, applySearch }) => {
   )
 }
 
-
 function Dropped() {
+  const [formData, setFormData] = useState({
+    payinUUID: '',
+    merchantOrderId: '',
+    utr: '',
+  })
+
+  const [filteredData, setFilteredData] = useState([]);
 
   const data = [
     {
@@ -97,19 +104,74 @@ function Dropped() {
       lastUpdated: '2024-06-03T16:00:00Z'
     }
   ];
+
+  const updateFormValue = ({ updateType, value }) => {
+    setFormData({ ...formData, [updateType]: value });
+  };
+
+  const filterData = () => {
+    let filtered = data;
+    if (formData.payinUUID) {
+      filtered = filtered.filter(item => item.payingUUID.includes(formData.payinUUID));
+    }
+    if (formData.merchantOrderId) {
+      filtered = filtered.filter(item => item.merchantOrderId.includes(formData.merchantOrderId));
+    }
+    if (formData.utr) {
+      filtered = filtered.filter(item => item.utr && item.utr.includes(formData.utr));
+    }
+    setFilteredData(filtered);
+  };
+
+  useEffect(() => {
+    filterData();
+  }, []);
+
   return (
     <>
+      <div className='bg-white p-4'>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full">
+          <InputText
+            labelTitle="Payin UUID"
+            value={formData.payinUUID}
+            updateFormValue={updateFormValue}
+            updateType="payinUUID"
+            type={"text"}
+            placeholder={"Enter payin uuid"}
+          />
+
+          <InputText
+            labelTitle="Merchant Order ID"
+            value={formData.merchantOrderId}
+            updateFormValue={updateFormValue}
+            updateType="merchantOrderId"
+            type={"text"}
+            placeholder={"Enter merchant order id"}
+          />
+          <InputText
+            labelTitle="UTR"
+            value={formData.utr}
+            updateFormValue={updateFormValue}
+            updateType="utr"
+            type={"text"}
+            placeholder={"Enter utr"}
+          />
+        </div>
+        <div className='flex justify-end items-center p-2 gap-4 mt-2'>
+          <button className='btn border btn-sm' onClick={() => setFormData({ payinUUID: '', merchantOrderId: '', utr: '' })}>Reset</button>
+          <button className='btn btn-sm btn-primary' onClick={filterData}>Submit</button>
+          <button className='btn border btn-sm'>Collapse</button>
+        </div>
+      </div>
 
       <TitleCard title="Recent Transactions" topMargin="mt-2" TopSideButtons={<TopSideButtons />}>
-
         {/* Team Member list in table format loaded constant */}
         <div className="overflow-x-auto w-full">
-          <TableComponent data={data} />
+          <TableComponent data={filteredData} />
         </div>
       </TitleCard>
     </>
   )
 }
-
 
 export default Dropped;
